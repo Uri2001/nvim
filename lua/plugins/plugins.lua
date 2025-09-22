@@ -1,6 +1,4 @@
-  return {
-
-    -- disable trouble
-  { "echasnovski/mini.starter", enabled = false },
-
+return {
+  -- disable trouble
+  { "nvim-mini/mini.starter", enabled = false },
 }

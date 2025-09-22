@@ -4,4 +4,7 @@
 
 -- Enable spell check in Russian and English
 vim.opt.spelllang = "en,ru"
-vim.opt.spellfile = vim.fn.stdpath('config') .. '/spell/en.utf-8.add,' .. vim.fn.stdpath('config') .. '/spell/ru.utf-8.add'
+vim.opt.spellfile = vim.fn.stdpath("config")
+  .. "/spell/en.utf-8.add,"
+  .. vim.fn.stdpath("config")
+  .. "/spell/ru.utf-8.add"
