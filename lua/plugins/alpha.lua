@@ -2,11 +2,14 @@
 
 return {
   "goolord/alpha-nvim",
-  opts = function()
+  opts = function(_, opts)
     local dashboard = require("alpha.themes.dashboard")
+    opts = opts or dashboard.config or {}
+    opts.section = opts.section or dashboard.section or {}
+    opts.section.header = opts.section.header or dashboard.section.header
 
     -- Настраиваем свой логотип
-    dashboard.section.header.val = {
+    opts.section.header.val = {
       [[                                                     ]],
       [[ ███▄    █ ▓█████  ▒█████   ██▒   █▓ ██▓ ███▄ ▄███▓  ]],
       [[  ██ ▀█   █ ▓█   ▀ ▒██▒  ██▒▓██░   █▒▓██▒▓██▒▀█▀ ██▒ ]],
@@ -54,6 +57,10 @@ return {
     --     dashboard.section.footer,
     -- }
 
-    return dashboard.config
+    if not opts.layout and dashboard.config and dashboard.config.layout then
+      opts.layout = dashboard.config.layout
+    end
+
+    return opts
   end,
 }
