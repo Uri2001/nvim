@@ -33,14 +33,11 @@ local function create_debug_commands()
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(config_str, "\n"))
 
     -- Устанавливаем опции буфера
-    vim.api.nvim_buf_set_option(buf, "modifiable", false)
-    vim.api.nvim_buf_set_option(buf, "filetype", "lua")
+    vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
+    vim.api.nvim_set_option_value("filetype", "lua", { buf = buf })
 
     -- Добавляем маппинг для закрытия окна
-    vim.api.nvim_buf_set_keymap(buf, "n", "q", ":q<CR>", {
-      noremap = true,
-      silent = true,
-    })
+    vim.keymap.set("n", "q", ":q<CR>", { buffer = buf, noremap = true, silent = true })
   end
 
   -- Создаём команду
@@ -65,4 +62,3 @@ end
 
 -- Инициализируем команды
 create_debug_commands()
-
