@@ -54,7 +54,6 @@ return {
     --     dashboard.section.footer,
     -- }
 
-    --- return dashboard.opts
+    return dashboard.opts
   end,
 }
-

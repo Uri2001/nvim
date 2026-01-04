@@ -4,8 +4,17 @@ return {
   event = "VeryLazy",
   opts = function()
     local icons = require("lazyvim.config").icons
-    local Util = require("lazyvim.util")
-    Snacks = require("snacks")
+    local ok_snacks, Snacks = pcall(require, "snacks")
+    if not ok_snacks then
+      Snacks = nil
+    end
+
+    local function safe_color(group)
+      if not Snacks or not Snacks.util or not Snacks.util.color then
+        return nil
+      end
+      return Snacks.util.color(group)
+    end
 
     return {
       options = {
@@ -63,7 +72,7 @@ return {
             cond = function()
               return package.loaded["noice"] and require("noice").api.status.command.has()
             end,
-            fg = Snacks.util.color("Statement"),
+            color = { fg = safe_color("Statement") },
           },
           {
             function()
@@ -72,7 +81,7 @@ return {
             cond = function()
               return package.loaded["noice"] and require("noice").api.status.mode.has()
             end,
-            fg = Snacks.util.color("Constant"),
+            color = { fg = safe_color("Constant") },
           },
           {
             function()
@@ -81,12 +90,12 @@ return {
             cond = function()
               return package.loaded["dap"] and require("dap").status() ~= ""
             end,
-            fg = Snacks.util.color("Debug"),
+            color = { fg = safe_color("Debug") },
           },
           {
             require("lazy.status").updates,
             cond = require("lazy.status").has_updates,
-            fg = Snacks.util.color("Special"),
+            color = { fg = safe_color("Special") },
           },
           {
             "diff",

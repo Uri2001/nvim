@@ -3,7 +3,11 @@
 -- Add any additional keymaps here
 
 -- Exit insert mode
-vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true, silent = true })
+vim.keymap.set("i", "jj", "<Esc>", { noremap = true, silent = true })
 
--- F5 toggle spell check
-vim.api.nvim_set_keymap('n', '<F5>', ':set spell!<CR>:lua print("Spell check: " .. (vim.wo.spell and "ON" or "OFF"))<CR>', { noremap = true, silent = true })
+-- F5 toggle spell check (buffer-local)
+vim.keymap.set("n", "<F5>", function()
+  vim.wo.spell = not vim.wo.spell
+  local status = vim.wo.spell and "ON" or "OFF"
+  print("Spell check: " .. status)
+end, { noremap = true, silent = true })
