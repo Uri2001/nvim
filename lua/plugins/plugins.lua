@@ -14,4 +14,6 @@ return {
       opts.handlers["systemd_ls"] = function() end
     end,
   },
+  { "nvzone/volt", lazy = true },
+  { "nvzone/menu", lazy = true },
 }
